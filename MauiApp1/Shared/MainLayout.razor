@@ -1,0 +1,18 @@
+﻿@using CommunityToolkit.Maui.Storage
+@using System.Text
+@inherits LayoutComponentBase
+
+<div class="page">
+    <main>
+        <button @onclick="DemonstrateTheBug">Click here to make your wildest dreams come true</button>
+    </main>
+</div>
+
+@code{
+    private async Task DemonstrateTheBug()
+    {
+        using var stream = new MemoryStream();
+        await stream.WriteAsync(Encoding.UTF8.GetBytes("Oh no! A GUID!"));
+        await FileSaver.SaveAsync("expected_filename.txt", stream, CancellationToken.None);
+    }
+}
